@@ -19,11 +19,11 @@ class UserTest extends PHPUnit_Framework_TestCase
         $crypt = new Bcrypt();
         $password = 'test';
         $cryptedPassword = $crypt->create($password);
-        $data  = array(
+        $data  = [
             'id'     => 123,
             'username'  => 'some_username',
             'password'  => $cryptedPassword,
-        );
+        ];
         $user->exchangeArray($data);
 
         $this->assertSame(

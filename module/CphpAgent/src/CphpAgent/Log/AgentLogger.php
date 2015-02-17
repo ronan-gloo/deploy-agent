@@ -21,7 +21,7 @@ class AgentLogger extends ZendLogger
      * @param array $extra
      * @return ZendLogger
      */
-    final public function log($priority, $message, $extra = array())
+    final public function log($priority, $message, $extra = [])
     {
         return parent::log($priority, $message, $extra);
     }

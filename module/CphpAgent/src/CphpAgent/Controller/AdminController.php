@@ -43,10 +43,10 @@ class AdminController extends AbstractActionController implements ConfigAwareInt
         }
 
         $form = $this->getServiceLocator()->get('cphp-agent.login.form');
-        return new ViewModel(array(
+        return new ViewModel([
             'form' => $form,
             'error' => $error,
-        ));
+        ]);
     }
 
     public function logoutAction()
@@ -87,9 +87,9 @@ class AdminController extends AbstractActionController implements ConfigAwareInt
             $error = $e->getMessage();
         }
 
-        return new ViewModel(array(
+        return new ViewModel([
             'error' => $error,
-        ));
+        ]);
     }
 
     public function setConfig($config)

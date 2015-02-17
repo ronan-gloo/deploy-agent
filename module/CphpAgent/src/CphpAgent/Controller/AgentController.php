@@ -33,7 +33,7 @@ class AgentController extends AbstractActionController implements ConfigAwareInt
         if (!empty($config) && !empty($url) && !empty($build) && !empty($project)) {
             $service = $this->getDeployManagerService();
             $service->deploy($build, $url, $project, $config);
-            return new ViewModel(array());
+            return new ViewModel([]);
         }else{
             return $this->redirect()->toRoute('zfcadmin/login');
         }

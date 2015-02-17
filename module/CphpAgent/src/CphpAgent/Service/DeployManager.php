@@ -54,10 +54,10 @@ class DeployManager extends EventProvider implements ServiceLocatorAwareInterfac
 
         $keyManager = new KeyManager();
         $keyManager->generate($buildId);
-        $params = array(
+        $params = [
             'apikey' => $keyManager->getHash(),
             'project_name' => $project
-        );
+        ];
         $url = $packageUrl . '&' . http_build_query($params);
 
         $this->getLogger()->info('######## START DEPLOYMENT ########');
@@ -204,7 +204,7 @@ class DeployManager extends EventProvider implements ServiceLocatorAwareInterfac
         $this->getLogger()->info('Executing Phing ...');
         $buildFile = $destination . 'build.xml';
         if(is_file($buildFile)){
-            $options = array('buildFile' => $buildFile);
+            $options = ['buildFile' => $buildFile];
             $buildResult = $this->getServiceLocator()->get('BsbPhingService')->build('show-defaults dist', $options);
             $this->getLogger()->info(implode($buildResult));
         }else{

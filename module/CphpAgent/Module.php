@@ -16,7 +16,7 @@ class Module implements ConfigProviderInterface, ServiceProviderInterface
     public function onBootstrap(MvcEvent $e)
     {
         $eventManager = $e->getApplication()->getEventManager();
-        $eventManager->attach(MvcEvent::EVENT_DISPATCH, array($this, 'authpreDispatch'), 1);
+        $eventManager->attach(MvcEvent::EVENT_DISPATCH, [$this, 'authpreDispatch'], 1);
         $moduleRouteListener = new ModuleRouteListener();
         $moduleRouteListener->attach($eventManager);
     }
@@ -29,7 +29,7 @@ class Module implements ConfigProviderInterface, ServiceProviderInterface
         if ($ctrl !== 'CphpAgent\Controller\Admin') return;
 
         if (!$authService->hasIdentity() && $action !== 'login'){
-            $url = $event->getRouter()->assemble(array('action' => 'login'), array('name' => 'zfcadmin/login'));
+            $url = $event->getRouter()->assemble(['action' => 'login'], ['name' => 'zfcadmin/login']);
 
             $response = $event->getResponse();
             $response->getHeaders()->addHeaderLine('Location', $url);
@@ -42,17 +42,17 @@ class Module implements ConfigProviderInterface, ServiceProviderInterface
 
     public function getControllerConfig()
     {
-        return array(
-            'initializers' => array(
+        return [
+            'initializers' => [
                 function ($instance, $sm) {
                     if ($instance instanceof ConfigAwareInterface) {
                         $config = $sm->getServiceLocator()->get('Config');
-                        $config = isset($config['deployAgent']) ? $config['deployAgent'] : array();
+                        $config = isset($config['deployAgent']) ? $config['deployAgent'] : [];
                         $instance->setConfig($config);
                     }
                 }
-            )
-        );
+            ]
+        ];
     }
 
     public function getServiceConfig()
@@ -73,12 +73,12 @@ class Module implements ConfigProviderInterface, ServiceProviderInterface
 
     public function getAutoloaderConfig()
     {
-        return array(
-            'Zend\Loader\StandardAutoloader' => array(
-                'namespaces' => array(
+        return [
+            'Zend\Loader\StandardAutoloader' => [
+                'namespaces' => [
                     __NAMESPACE__ => __DIR__ . '/src/' . __NAMESPACE__,
-                ),
-            ),
-        );
+                ],
+            ],
+        ];
     }
 }

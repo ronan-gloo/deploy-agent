@@ -53,10 +53,10 @@ class Tarball
      */
     public function streamFromUrl($tarUrl)
     {
-        $client = new Client($tarUrl, array(
+        $client = new Client($tarUrl, [
             'sslverifypeer' => null,
             'sslallowselfsigned' => null,
-        ));
+        ]);
         $client->setStream();
         $stream = $client->send();
         return $stream;

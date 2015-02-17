@@ -25,7 +25,7 @@ class Bootstrap
             $testConfig = include __DIR__ . '/TestConfig.php.dist';
         }
 
-        $zf2ModulePaths = array();
+        $zf2ModulePaths = [];
 
         if (isset($testConfig['module_listener_options']['module_paths'])) {
             $modulePaths = $testConfig['module_listener_options']['module_paths'];
@@ -42,11 +42,11 @@ class Bootstrap
         static::initAutoloader();
 
         // use ModuleManager to load this module and it's dependencies
-        $baseConfig = array(
-            'module_listener_options' => array(
+        $baseConfig = [
+            'module_listener_options' => [
                 'module_paths' => explode(PATH_SEPARATOR, $zf2ModulePaths),
-            ),
-        );
+            ],
+        ];
 
         $config = ArrayUtils::merge($baseConfig, $testConfig);
 
@@ -85,14 +85,14 @@ class Bootstrap
 
         }
 
-        AutoloaderFactory::factory(array(
-            'Zend\Loader\StandardAutoloader' => array(
+        AutoloaderFactory::factory([
+            'Zend\Loader\StandardAutoloader' => [
                 'autoregister_zf' => true,
-                'namespaces' => array(
+                'namespaces' => [
                     __NAMESPACE__ => __DIR__ . '/' . __NAMESPACE__,
-                ),
-            ),
-        ));
+                ],
+            ],
+        ]);
     }
 
     protected static function findParentPath($path)
